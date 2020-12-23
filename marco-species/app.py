@@ -401,6 +401,16 @@ def observe_delete(_id):
         abort(403) # the user is not allowed to delete this observation
     abort(404)
 
+@app.route('/_todolist_clear_all')
+@glogin_required
+def todo_clear():
+    """clear all todo lists"""
+    if g.current_user.get('is_admin'):
+        models.todolist_clear_all()
+        return "Cleared todo lists success -- <a href='/'>Go Home</a>"
+    else:
+        abort(403)
+
 if __name__ == '__main__':
     args = sys.argv
     args.append('--runserver')

@@ -111,8 +111,8 @@ def random_sample(collection, sample_size):
         sample_collection.append(this_sample)
     return sample_collection
 
-def clear_all_todo_lists():
-    """clear_all_todo_lists() - for admin maintenance, will clear user todo lists.
+def todolist_clear_all():
+    """todolist_clear_all() - for admin maintenance, will clear user todo lists.
     please use sparingly.
     """
     db = db_connect()
