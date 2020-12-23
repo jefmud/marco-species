@@ -1,0 +1,46 @@
+{% extends "bootstrap/base.html" %}
+{% from "_macros.html" import render_navigation, render_messages %}
+{% block title %}Profile{% endblock %}
+
+{% block navbar %}
+{{ render_navigation(g.current_user) }}
+{% endblock %}
+
+{% block content %}
+<div class="container theme-showcase" role="main" style="margin-top:60px;">
+  {{ render_messages(messages) }}
+  <h1>Hello, {{ g.current_user.name }}</h1>
+  <p><a href="#talk">Jump to Notes and Talk</a></p>
+  <div class="row">
+  <a class="btn btn-primary" role="button" href="{{ url_for('observe')}}">Make a new observation</a>
+  </div>
+  <div class="row">
+    <a class="btn btn-info" role="button" href="{{ url_for('todo_view') }}">View TODO list</a>
+  </div>
+  <p>Recent observations: You have {{obs.count()}} observations on record.</p>
+  
+    <table class="table table-striped">
+    {% for item in obs %}
+      {% if item.confirm %}
+        <tr>
+          <td><a href="{{ url_for('observe', captureID=item.captureID) }}" class="alert-link">{{item.captureID}}</a></td><td>(confirm)</td>
+        </tr>
+      {% else %}
+        <tr>
+          <td><a href="{{ url_for('observe', captureID=item.captureID) }}" class="alert-link">{{item.captureID}}</a></td><td>(refute)</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </table>
+    <a name="talk">
+    <h2>Talk and Notes</h2>
+  <div class="row">
+    {% for item in talk %}
+      <div class="alert alert-warning" role="alert">
+      {{ item.notes }}
+      <a href="{{ url_for('observe', captureID=item.captureID) }}">Click here for more details</a>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+{% endblock %}

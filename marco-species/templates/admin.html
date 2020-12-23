@@ -1,0 +1,27 @@
+{% extends "bootstrap/base.html" %}
+{% from "_macros.html" import render_navigation, render_messages %}
+{% block title %}Admin Index{% endblock %}
+
+{% block navbar %}
+{{ render_navigation(g.current_user, 'admin') }}
+{% endblock %}
+
+{% block content %}
+<div class="container theme-showcase" role="main" style="margin-top:60px;">
+  {{ render_messages(messages) }}
+  <h1>Administration</h1>
+  <p>
+    <ul>
+      <li><a href="/admin/usersview">User</a></li>
+      <li><a href="/admin/identsview">Idents</a></li>
+      <li>To act as user, /admin/actasuser/{email}</li>
+      <li>Test proxy server <a href="http://serengeti.wfunet.wfu.edu/SEASON_13/C01_R3/IMAG1889.JPG">Link</a></li>
+    </ul>
+  </p>
+  <p>
+  <b>Notes:</b>
+  <li>You will have to modify admin.html to add more administrative view links.</li>
+  <li>Something else</li>
+  </p>
+</div>
+{% endblock %}

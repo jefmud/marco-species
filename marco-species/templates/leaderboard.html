@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{% from "_macros.html" import render_navigation, render_messages %}
+{% block title %}Profile{% endblock %}
+
+{% block navbar %}
+{{ render_navigation(g.current_user, active_page='leaders') }}
+{% endblock %}
+
+{% block content %}
+<div class="container theme-showcase" role="main" style="margin-top:60px;">
+  {{ render_messages(messages) }}
+  <h1>Leaderboard</h1>
+  
+  <div class="row">
+    <div class="col-sm-6" style="background-color:#FFCECE;">
+      <h2>This week</h2>
+      {% if this_week %}
+        <table class="table table-striped">
+        {% for user, count in this_week %}
+          <tr><td>{{user}}</td><td>{{count}}</td></tr>
+        {% endfor %}
+        </table>
+      {% else %}
+          <p>No activity this week</p>
+      {% endif %}
+  </div>
+  
+    <div class="col-sm-6" style="background-color:#E5FFE1;">
+      <h2>All Time</h2>
+      {% if all_time %}
+        <table class="table table-striped">
+        {% for user, count in all_time %}
+          <tr><td>{{user}}</td><td>{{count}}</td></tr>
+        {% endfor %}
+        </table>
+      {% else %}
+          <p>No activity to report</p>
+      {% endif %}
+    </div>
+  </div<
+  
+</div>
+{% endblock %}

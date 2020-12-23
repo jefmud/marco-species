@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# launch as root or approved user, daemonize, 2 workers, bind to port (or socket)
+# using as root is NOT a good practice--
+# when in PRODUCTION run as a properly privileged user
+# IMPROVEMENTS for later--
+# reference a PID (process IDs) file in the var directory
+# pid file will allow checking status and graceful shutdown/restart
+# bind to a unix socket rather than port (slight security improvement)
+echo "Starting app as daemon"
+/home/ubuntu/env/bin/gunicorn -D -w 2 app:app -b 0.0.0.0:5000
+echo "Note: to stop the daemon..."
+echo "$ sudo ./daemon.stop"
+echo " -- or --"
+echo "$ sudo killall -SIGKILL gunicorn"

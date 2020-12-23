@@ -1,0 +1,4 @@
+#!/bin/sh
+# quick and dirty, should use a pid file (shame on me)
+echo "stoping gunicorn daemon..."
+killall -SIGKILL gunicorn

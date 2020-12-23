@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{% from "_macros.html" import render_navigation, render_messages %}
+{% block title %}Serengeti Survey{% endblock %}
+
+{% block navbar %}
+{{ render_navigation(g.current_user) }}
+{% endblock %}
+
+{% block content %}
+<div class="container theme-showcase" role="main" style="margin-top:60px;">
+  {{ render_messages(messages) }}
+  <h1>Hello, Camera Trapper</h1>
+  <h3>Fast Facts</h3>
+  <ul>
+  
+    <li>We currently have {{ data.snapshots }} snaphots in the database.</li>
+    <li>So far, we have made {{ data.observations }} observations.</li>
+    <li>This is {{ data.percent }}% of all the current snapshots!</li>
+  </ul>
+  
+  {% if user_stats %}
+  <h3>Leaderboard</h3>
+  <ol>
+    {% for u in user_stats %}
+      <li>{{ u[0] }}: {{ u[1] }}</li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  {% if g.current_user.is_authenticated %}
+  <h3>Things to do</h3>
+  <ul>
+    <li><a href="{{ url_for('profile_user') }}">Go to your profile page.  This is where you can see your personal stats.</a></li>
+    <li><a href="{{ url_for('observe') }}">Jump straight into observations!</a></li>
+  </ul>
+  {% else %}
+    <p>
+     If you already have an account, click the LOGIN link above or click here:
+     <a href="{{ url_for('glogin') }}">Login</a>.
+    </p>
+  {% endif %}
+  
+</div>
+{% endblock %}
