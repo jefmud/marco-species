@@ -294,7 +294,7 @@ def observe(captureID=None):
 
     # get ident or show a 404
     dkey = {'captureID':captureID}
-    data = g.db[config.idents_collection].find_one(dkey)
+    data = g.db[config.study_collection].find_one(dkey)
     if data is None:
         abort(404)
 
